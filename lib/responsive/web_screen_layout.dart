@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_clone_app/colors.dart';
+import 'package:google_clone_app/widgets/search.dart';
+import 'package:google_clone_app/widgets/web/search_buttons.dart';
+import 'package:google_clone_app/widgets/web/translation_buttons.dart';
 
 class WebScreenLayout extends StatelessWidget {
   const WebScreenLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
@@ -58,7 +62,30 @@ class WebScreenLayout extends StatelessWidget {
           ),
         ],
       ),
-      body: Text('Hello from Web!'),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 5),
+        child: Column(
+          children: [
+            SizedBox(height: size.height * 0.25),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: const [
+                      Search(),
+                      SizedBox(height: 20),
+                      SearchButtons(),
+                      SizedBox(height: 20),
+                      TranslationButtons(),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
