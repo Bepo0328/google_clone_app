@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_clone_app/colors.dart';
-import 'package:google_clone_app/responsive/moblie_screen_layout.dart';
+import 'package:google_clone_app/responsive/mobile_screen_layout.dart';
 import 'package:google_clone_app/responsive/responsive_layout_screen.dart';
 import 'package:google_clone_app/responsive/web_screen_layout.dart';
 
