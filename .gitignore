@@ -257,3 +257,6 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/dart,flutter,android,androidstudio
+
+# API Key
+lib/config/api_keys.dart
