@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_clone_app/colors.dart';
 import 'package:google_clone_app/widgets/mobile/mobile_footer.dart';
 import 'package:google_clone_app/widgets/search.dart';
-import 'package:google_clone_app/widgets/web/search_buttons.dart';
-import 'package:google_clone_app/widgets/web/translation_buttons.dart';
 
 class MobileScreenLayout extends StatelessWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -77,9 +75,6 @@ class MobileScreenLayout extends StatelessWidget {
                     children: const [
                       Search(),
                       SizedBox(height: 20),
-                      SearchButtons(),
-                      SizedBox(height: 20),
-                      TranslationButtons(),
                     ],
                   ),
                   const MobileFooter(),

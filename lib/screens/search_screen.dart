@@ -32,7 +32,10 @@ class SearchScreen extends StatelessWidget {
               // tabs for news images etc
               Padding(
                 padding: EdgeInsets.only(left: size.width <= 768 ? 10 : 150),
-                child: const SearchTabs(),
+                child: const SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SearchTabs(),
+                ),
               ),
               const Divider(height: 0, thickness: 0.3),
               // search results
@@ -45,94 +48,100 @@ class SearchScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: size.width <= 768 ? 10 : 150,
-                            top: 12,
-                          ),
-                          child: Text(
-                            'About ${snapshot.data?['searchInformation']['formattedTotalResults']} results (${snapshot.data?['searchInformation']['formattedSearchTime']} seconds)',
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Color(0xFF70757A),
-                            ),
-                          ),
-                        ),
-                        ListView.builder(
-                          itemCount: snapshot.data?['items'].length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Padding(
+                        Column(
+                          children: [
+                            Container(
                               padding: EdgeInsets.only(
                                 left: size.width <= 768 ? 10 : 150,
-                                top: 10,
+                                top: 12,
                               ),
-                              child: SearchResultComponent(
-                                link: snapshot.data?['items'][index]
-                                    ['formattedUrl'],
-                                text: snapshot.data?['items'][index]['title'],
-                                linkToGo: snapshot.data?['items'][index]
-                                    ['link'],
-                                desc: snapshot.data?['items'][index]['snippet'],
-                              ),
-                            );
-                          },
-                        ),
-                        // pagination buttons
-                        SizedBox(
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  if (start != '0') {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => SearchScreen(
-                                          searchQuery: searchQuery,
-                                          start: (int.parse(start) - 10)
-                                              .toString(),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                },
-                                child: const Text(
-                                  '< Prev',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: blueColor,
-                                  ),
+                              child: Text(
+                                'About ${snapshot.data?['searchInformation']['formattedTotalResults']} results (${snapshot.data?['searchInformation']['formattedSearchTime']} seconds)',
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xFF70757A),
                                 ),
                               ),
-                              const SizedBox(width: 30),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => SearchScreen(
-                                        searchQuery: searchQuery,
-                                        start:
-                                            (int.parse(start) + 10).toString(),
+                            ),
+                            ListView.builder(
+                              itemCount: snapshot.data?['items'].length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    left: size.width <= 768 ? 10 : 150,
+                                    top: 10,
+                                  ),
+                                  child: SearchResultComponent(
+                                    link: snapshot.data?['items'][index]
+                                        ['formattedUrl'],
+                                    text: snapshot.data?['items'][index]
+                                        ['title'],
+                                    linkToGo: snapshot.data?['items'][index]
+                                        ['link'],
+                                    desc: snapshot.data?['items'][index]
+                                        ['snippet'],
+                                  ),
+                                );
+                              },
+                            ),
+                            // pagination buttons
+                            SizedBox(
+                              width: double.infinity,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      if (start != '0') {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => SearchScreen(
+                                              searchQuery: searchQuery,
+                                              start: (int.parse(start) - 10)
+                                                  .toString(),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: const Text(
+                                      '< Prev',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: blueColor,
                                       ),
                                     ),
-                                  );
-                                },
-                                child: const Text(
-                                  'Next >',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: blueColor,
                                   ),
-                                ),
+                                  const SizedBox(width: 30),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => SearchScreen(
+                                            searchQuery: searchQuery,
+                                            start: (int.parse(start) + 10)
+                                                .toString(),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text(
+                                      'Next >',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: blueColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 30),
+                            const SearchFooter(),
+                          ],
                         ),
-                        const SizedBox(height: 30),
-                        const SearchFooter(),
                       ],
                     );
                   }
